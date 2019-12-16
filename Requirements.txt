@@ -1,0 +1,10 @@
+asgiref==3.2.3
+Django==2.2.8
+django-grappelli==2.13.2
+djangorestframework==3.11.0
+gunicorn==20.0.4
+linecache2==1.0.0
+psycopg2==2.8.4
+pytz==2019.3
+six==1.13.0
+sqlparse==0.3.0

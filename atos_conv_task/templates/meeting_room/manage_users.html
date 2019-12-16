@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Переговорная {{room.meeting_room_id}}{% endblock %}
+
+{% block content_middle%}
+<table class="manage_user_table">
+    <caption> <strong>Пользователи</strong></caption>
+    <tr>
+        <th class="manage_user_table_th">Username</th>
+        <th class="manage_user_table_th">Email</th>
+        <th class="manage_user_table_th">Status</th>
+        <th class="manage_user_table_th"></th>
+    </tr>
+    {% for user, is_manager in cur_set %}
+    <tr>
+        <th class="manage_user_table_th">{{user.username}}</th>
+        <th class="manage_user_table_th">{{user.email}}</th>
+        {% if is_manager == True %}
+        <th class="manage_user_table_th">Офис-менеджер</th>
+        {% else %}
+        <th class="manage_user_table_th">Обычный работник</th>
+        {% endif %}
+        <th class="manage_user_table_th">
+            <div>
+                <input type="submit" class="manage_user_table_submit add_member" value="Выдать права"
+                       onclick="window.location='/mr/group_add_member_{{user.id}}/';"/>
+                <input type="submit" class="manage_user_table_submit delete_member" value="Отозвать права"
+                       onclick="window.location='/mr/group_delete_member_{{user.id}}/';"/>
+            </div>
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+
+{% block content_right %}
+{% endblock %}}

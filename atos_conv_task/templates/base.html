@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Тест base html {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href=" {%static 'meeting_room/css/style.css' %}" />
+</head>
+<body>
+<div class="top">
+    <div class="header">
+        <a href="/mr">
+            <strong>ПЕРЕГОВОРНЫЕ</strong>
+        </a>
+    </div>
+    <div class="login">
+        {% if user.is_authenticated %}
+        <a href="/mr/logout/">
+            <strong>Logout</strong><br/>
+            <strong>{{ user.get_username }}</strong>
+        </a>
+        {% else %}
+        <a href="/mr/login_page/">
+            <strong>Login</strong>
+        </a>
+        {% endif %}
+    </div>
+</div>
+<div class="content">
+    <div class="content_left">
+        {% block content_left %}{% endblock %}
+    </div>
+    <div class="content_middle">
+        {% block content_middle%}{% endblock %}
+    </div>
+    <div class="content_right">
+        {% block content_right%}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

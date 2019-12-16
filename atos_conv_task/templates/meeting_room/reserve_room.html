@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Забронировать переговорную{{room.meeting_room_name}}{% endblock %}
+
+{% block content_middle%}
+<div class="meeting_room">
+    <form action="/mr/reserve_room/" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Забронировать">
+    </form>
+</div>
+{% endblock %}

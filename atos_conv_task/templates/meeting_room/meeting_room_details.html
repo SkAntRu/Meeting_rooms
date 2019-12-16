@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Переговорная {{room.meeting_room_id}}{% endblock %}
+
+{% block content_middle%}
+<div class="meeting_room_details">
+    <div class="meeting_room_name">
+        {{ room.meeting_room_name }}
+    </div>
+    <table class="meeting_room_details_table">
+        <caption>В комнате {{room.amount_of_chairs}} мест</caption>
+        <tr>
+            <td class="meeting_room_details_table_td">
+                {% if room.projector %}
+                <img class="meeting_room_img" src="{% static 'meeting_room/images/check_mark.png'%}" alt="Есть проектор">
+                {% endif %}
+            </td>
+            <td class="meeting_room_details_table_td">Проектор</td>
+        </tr>
+        <tr>
+            <td class="meeting_room_details_table_td">
+                {% if room.flip_chart %}
+                <img class="meeting_room_img" src="{% static 'meeting_room/images/check_mark.png'%}" alt="Есть проектор">
+                {% endif %}
+            </td>
+            <td class="meeting_room_details_table_td">Флипчарт</td>
+        </tr>
+    </table>
+    {% if room.description %}
+    <div class="room_description">
+        {{room.description}}
+    </div>
+    {% else %}
+    <div class="room_description">
+        Описание отсутствует
+    </div>
+    {% endif %}
+    <br/>
+    {% if bids %}
+    <table cellspacing="0" class="meeting_room_details_table">
+        <caption> <strong>Зарезервированное время </strong></caption>
+        <tr>
+            <th class="meeting_room_details_table th">Дата бронирования переговорной</th>
+            <th class="meeting_room_details_table th">Время</th>
+            <th>Пользователь</th>
+        </tr>
+        {% for bid in bids %}
+        {% if bid.approved_flag == 1 %}
+        <tr>
+            <td class="unapproved_bid">{{bid.reserved_date}}</td>
+            <td class="unapproved_bid">{{bid.reserved_time}}</td>
+            <td class="unapproved_bid">{{bid.author.username}}</td>
+        </tr>
+        {% elif bid.approved_flag == 2 %}
+        <tr>
+            <td class="approved_bid">{{bid.reserved_date}}</td>
+            <td class="approved_bid">{{bid.reserved_time}}</td>
+            <td class="approved_bid">{{bid.author.username}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>В данной переговорной забронированное время отсутствует</p>
+    {% endif %}
+    <input type="submit" class="btn_reserve" value="Забронировать переговорную"
+           onclick="window.location='/mr/reserve_room_{{ room.pk }}/';" />
+</div>
+{% endblock %}
+
+
+{% block content_right %}
+{% if is_manager == True %}
+<div class="meeting_room_details_right">
+    <input type="submit" value="Редактировать переговорную"
+           onclick="window.location='/mr/customize_room_{{ room.meeting_room_name }}/';" />
+</div>
+{% endif %}
+{% endblock %}}

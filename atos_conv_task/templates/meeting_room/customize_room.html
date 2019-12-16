@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Переговорная {{room.meeting_room_id}}{% endblock %}
+
+{% block content_middle%}
+<div class="meeting_room">
+    <form method="POST" action="/mr/customize_room_{{form.meeting_room_name.value}}/">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" value="Сохранить" >
+    </form>
+</div>
+{% endblock %}
