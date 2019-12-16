@@ -1,4 +1,6 @@
-This Application developed with Python 3.7.0
+This app allows you to reserve Meeting Rooms and do some necessary things
+
+Application developed with Python 3.7.0
 Using PostgresQL 11
 
 To set up app
