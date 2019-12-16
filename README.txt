@@ -11,8 +11,16 @@ create user atos with password 'atos';
 alter user atos createdb;
 
 4. Run from OS shell:
+Windows:
 python manage.py makemigrations
 python manage.py migrate
+python manage.py collectstatic
+
+Linux:
+cd to project location
+./manage.py makemigrations
+./manage.py migrate
+./manage.py collectstatic
 
 5. Continue in SQL shell:
 grant all privileges on database atos_test_conv to atos;
